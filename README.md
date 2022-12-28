@@ -1,4 +1,5 @@
 # JuegoConecta4
+Reglas del Conecta 4
 
 El Conecta 4 se juega de a dos jugadores sobre un tablero de siete columnas y seis filas.
 
