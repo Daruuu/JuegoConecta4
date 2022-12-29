@@ -17,6 +17,7 @@ public class Conecta4 {
                         break;
                     case 2:
 
+                        comprobarGanador();
                         break;
                 }
                 break;
@@ -96,7 +97,7 @@ public class Conecta4 {
         }
     }
 
-    public static void turnosJugadores(char[][] tablero,Scanner sc){
+    public static void turnosJugadores(char[][] tablero, Scanner sc) {
         boolean turnosJugadores = true;
         int contadorTurnos = 0;
         int turno = 0;
@@ -107,12 +108,15 @@ public class Conecta4 {
                 introducirFichaJugador2(tablero, sc);
             }
             contadorTurnos++;
+            if ()
+
+                if (contadorTurnos > 42) {
+                    System.out.println("juego acabado");
+                }
             turnosJugadores = false;
         }
-        if (turno > 42){
-            System.out.println("juego acabado");
-        }
     }
+
     public static void imprimirTablero(char[][] tablero) {
         for (char[] f : tablero) {
             for (char c : f) {
@@ -251,9 +255,17 @@ public class Conecta4 {
         return false;
     }
 
+    public static void comprobarGanador() {
+        if (comprobarFichasEnVertical(tablero, jugador[0]) || comprobarFichasEnHorizontal(tablero, jugador[0]) || comprobarFichasDeIzquierdaSuperiorADerechaInferior(tablero, jugador[0]) || comprobarFichasDeDerechaInferiorAIzquierdaSuperior(tablero, jugador[0])) {
+            System.out.println("jugador 1 gana");
+        } else if (comprobarFichasEnVertical(tablero, jugador[1]) || comprobarFichasEnHorizontal(tablero, jugador[1]) || comprobarFichasDeIzquierdaSuperiorADerechaInferior(tablero, jugador[1]) || comprobarFichasDeDerechaInferiorAIzquierdaSuperior(tablero, jugador[1])) {
+            System.out.println("jugador 2 gana");
+        } else {
+            System.out.println("juego en empate");
+        }
+    }
+
     public static void resumenPartida() {
         cronometro();
     }
-
-
 }
