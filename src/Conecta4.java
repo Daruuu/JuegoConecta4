@@ -57,6 +57,7 @@ public class Conecta4 {
         }
     }
 
+    //tablero del juego
     public static void visualizarTablero(char[][] tablero) {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
@@ -70,17 +71,14 @@ public class Conecta4 {
         imprimirTablero(tablero);
     }
 
-    //0-1-2-3-4-5-6 --> columnas a elegir en el juego == 6
-    //iterar por cada fila
-    public static void introducirFichaJugador(char[][] tablero, Scanner sc, int idx_jugador) {
+    //0-1-2-3-4-5-6 --> columnas a elegir en el juego
+    public static void introducirFichaJugador(char[][] tablero, Scanner sc, int indiceJugador) {
         System.out.print("Jugador 1\nelige una columna del 0 al 6: ");
         int ficha = sc.nextInt();
-//        int nuevaFicha = ficha * 2 + 1;    //posiciones equivalentes en el tablero --> 1-3-5-7-9-11-13
-        // 0-5 = filas de cada columna en el TABLERO
         //iterar de la fila 6 a la fila 1
         for (int i = tablero.length - 1; i >= 0; i--) {
             if (tablero[i][ficha] == ' ') {
-                tablero[i][ficha] = jugador[idx_jugador];
+                tablero[i][ficha] = jugador[indiceJugador];
                 break;
             }
         }
@@ -89,12 +87,10 @@ public class Conecta4 {
     public static void turnosJugadores(char[][] tablero, Scanner sc) {
         boolean turnoJugador = true;
         int contadorTurnos = 0;
-        int turno = 0;
         int turnosMaximos = 42;
-        while (turnoJugador) {
+        while (turnoJugador && contadorTurnos <= turnosMaximos) {
             if (contadorTurnos % 2 == 0) {
                 introducirFichaJugador(tablero, sc, 0);
-                //introducirFichaJugador1(tablero, sc);
             } else if (contadorTurnos % 2 == 1) {
                 introducirFichaJugador(tablero, sc, 1);
                 // introducirFichaJugador2(tablero, sc);
@@ -102,10 +98,6 @@ public class Conecta4 {
             contadorTurnos++;
             imprimirTablero(tablero);
             comprobarGanador();
-//            if (contadorTurnos > 42) {
-//                turnoJugador = false;
-//                System.out.println("juego acabado");
-//            }
         }
     }
 
@@ -136,7 +128,6 @@ public class Conecta4 {
         System.out.println(tiempoTranscurridoTotal);
     }
 
-    // comprobamos si las 4 posiciones NO estan vacias y que las 4 posiciones coincidan en el caracter del jugador
     //[0][0] [0][1] [0][2] [0][3] [0][4] [0][5] [0][6]
     //[1][0] [1][1] [1][2] [1][3] [1][4] [1][5] [1][6]
     //[2][0] [2][1] [2][2] [2][3] [2][4] [2][5] [2][6]
@@ -181,7 +172,6 @@ public class Conecta4 {
                     return true;
                 }
             }
-
         }
         return false;
     }
@@ -211,18 +201,59 @@ public class Conecta4 {
         return false;
     }
 
-    public static boolean comprobarFichasDeIzquierdaInferiorADerechaSuperior(char[][] tablero, char fichaJugador) {
-
-        return false;
-    }
-
+    //i  j
     //[0][0] [0][1] [0][2] [0][3] [0][4] [0][5] [0][6]
     //[1][0] [1][1] [1][2] [1][3] [1][4] [1][5] [1][6]
     //[2][0] [2][1] [2][2] [2][3] [2][4] [2][5] [2][6]
     //[3][0] [3][1] [3][2] [3][3] [3][4] [3][5] [3][6]
     //[4][0] [4][1] [4][2] [4][3] [4][4] [4][5] [4][6]
     //[5][0] [5][1] [5][2] [5][3] [5][4] [5][5] [5][6]
-    public static boolean comprobarFichasDeDerechaSuperiorAIzquierdaInferior(char[][] tablero, char fichaJugador) {
+    public static boolean derechaSuperiorAIzquierdaInferior(char[][] tablero, char fichaJugador) {
+        /*
+        int inicioFilaI = 0;
+        int inicioColumnaJ = 3;
+
+        while (inicioColumnaJ < 7 || inicioFilaI > 6) {
+            for (int i = 0; i < tablero.length; i++) {
+                int contadorFichasConsecutivas = 0;
+                for (int j = tablero[0].length - 1; j >= 0; j--) {
+
+                    if (tablero[i][j] == fichaJugador) {
+                        contadorFichasConsecutivas++;
+                    } else if (tablero[i][j] != fichaJugador) {
+                        contadorFichasConsecutivas = 0;
+                    }
+                    if (contadorFichasConsecutivas == 4) {
+                        return true;
+                    }
+                }
+                inicioFilaI++;
+                inicioColumnaJ++;
+            }
+        }
+        return false;
+    }
+         */
+
+        for (int i = 0; i < tablero.length; i++) {
+            int contadorFichasConsecutivas = 0;
+
+            for (int j = tablero[0].length - 1; j >= 0; j--) {
+                if (tablero[i][j] == fichaJugador) {
+                    contadorFichasConsecutivas++;
+                } else if (tablero[i][j] != fichaJugador) {
+                    contadorFichasConsecutivas = 0;
+                }
+                if (contadorFichasConsecutivas == 4) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public static boolean comprobarDerechaSuperiorAIzquierdaInferior(char[][] tablero, char fichaJugador) {
         int diagonal = 6;
         int inicio_i = 0, fin_i = 5, inicio_j = 0, fin_j = 6;
         while (diagonal >= 1) {
@@ -239,7 +270,7 @@ public class Conecta4 {
             }
             int i = inicio_i, j = inicio_j;
             int contadorFichasConsecutivas = 0;
-            while(i >= fin_i && j <= fin_j) {
+            while (i >= fin_i && j <= fin_j) {
                 if (tablero[i][j] == fichaJugador) {
                     contadorFichasConsecutivas++;
                 } else if (tablero[i][j] != fichaJugador) {
@@ -278,7 +309,7 @@ public class Conecta4 {
     //[4][0] [4][1] [4][2] [4][3] [4][4] [4][5] [4][6]
     //[5][0] [5][1] [5][2] [5][3] [5][4] [5][5] [5][6]
     public static boolean comprobarFichasDeDerechaInferiorAIzquierdaSuperior(char[][] tablero, char fichaJugador) {
-        for (int i = tablero.length-1; i >= 0; i--) {
+        for (int i = tablero.length - 1; i >= 0; i--) {
             int contadorFichasConsecutivas = 0;
             for (int j = tablero[i].length - 1; j >= 0; j--) {
                 if (tablero[i][j] == fichaJugador) {

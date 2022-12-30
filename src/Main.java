@@ -59,19 +59,24 @@ public class Main {
         tablero[3][0] = 'X';
         tablero[2][1] = 'X';
         tablero[1][2] = 'X';
-        tablero[0][3] = 'O';
-        /*
-        tablero[4][0] = 'X';
-        tablero[4][1] = 'X';
-        tablero[4][2] = 'X';
-        tablero[4][3] = 'X';
-
-         */
-        if (Conecta4.comprobarFichasDeDerechaSuperiorAIzquierdaInferior(tablero, 'X')) {
+        tablero[0][3] = 'X';
+        if (Conecta4.derechaSuperiorAIzquierdaInferior(tablero, 'X')) {
             System.out.println("Ganador encontrado");
         } else {
             System.out.println("No ganador");
         }
+        /*
+
+        tablero[3][0] = 'X';
+        tablero[2][1] = 'X';
+        tablero[1][2] = 'X';
+        tablero[0][3] = 'O';
+        if (Conecta4.comprobarDerechaSuperiorAIzquierdaInferior(tablero, 'X')) {
+            System.out.println("Ganador encontrado");
+        } else {
+            System.out.println("No ganador");
+        }
+         */
 
 //        tablero[5][6] = 'X';
 //        tablero[4][5] = 'X';
