@@ -91,60 +91,33 @@ public class Main {
 //        }
 //        System.out.println("Hello world!");
         //Conecta4.juego();
-
-        tablero[3][0] = 'X';
-        tablero[2][1] = 'X';
-        tablero[1][2] = 'X';
-        tablero[0][3] = 'X';
-        if (Conecta4.iteracionEnDiagonalDerechaAIzquierda(tablero, 0, 3, 3, 0, 'X')) {
+        /*
+        tablero[1][4] = 'X';
+        tablero[4][1] = 'X';
+        tablero[3][2] = 'X';
+        tablero[2][3] = 'X';
+        if (imprimirDiagonalIzquierdaInferiorADerechaParte1(tablero, 'X')) {
             System.out.println("Ganador encontrado");
         } else {
             System.out.println("No ganador");
         }
-    }
+         */
+/*
+        tablero[5][3] = 'X';
+        tablero[4][4] = 'X';
+        tablero[3][5] = 'X';
+        tablero[2][6] = 'X';
+*/
 
-    public static boolean imprimirDiagonalIzquierdaInferiorADerechaParte1(char[][] tablero, int fichaJugador) {
-
-        for (int k = 3; k <= tablero.length - 1; k++) {
-            int contadorFichasConsecutivas = 0;
-            int i = k;
-            int j = 0;
-            while (i >= 0) {
-                if (tablero[i][j] == fichaJugador) {
-                    contadorFichasConsecutivas++;
-                } else if (tablero[i][j] != fichaJugador) {
-                    contadorFichasConsecutivas = 0;
-                }
-                if (contadorFichasConsecutivas == 4) {
-                    return true;
-                }
-                i = i - 1;
-                j = j + 1;
-            }
+        tablero[5][2] = 'O';
+        tablero[4][3] = 'X';
+        tablero[3][4] = 'X';
+        tablero[2][5] = 'X';
+        tablero[1][6] = 'X';
+        if (Conecta4.comprobarDiagonalIzquierdaADerechaParte2(tablero, 'X')) {
+            System.out.println("Ganador encontrado");
+        } else {
+            System.out.println("No ganador");
         }
-        return false;
-    }
-
-    public static boolean comprobarDiagonalIzquierdaADerechaParte2(char[][] tablero, int fichaJugador) {
-
-        for (int k = 1; k <= tablero[0].length - 1; k++) {
-            int contadorFichasConsecutivas = 0;
-            int i = tablero.length - 1;
-            int j = k;
-            while (j <= tablero[0].length - 1) {
-
-                if (tablero[i][j] == fichaJugador) {
-                    contadorFichasConsecutivas++;
-                } else if (tablero[i][j] != fichaJugador) {
-                    contadorFichasConsecutivas = 0;
-                }
-                if (contadorFichasConsecutivas == 4) {
-                    return true;
-                }
-                i = i - 1;
-                j = j + 1;
-            }
-        }
-        return false;
     }
 }

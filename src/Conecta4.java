@@ -176,6 +176,57 @@ public class Conecta4 {
         return false;
     }
 
+    public static boolean imprimirDiagonalIzquierdaInferiorADerechaParte1(char[][] tablero, int fichaJugador) {
+
+        for (int k = 3; k <= tablero.length - 1; k++) { //k=3
+            int contadorFichasConsecutivas = 0;
+            int i = k;  //i=3
+            int j = 0;  //j=0
+            //j aumenta hasta tablero[0].length
+            while (i >= 0 && j <= tablero[0].length-1) {
+                //i=3       j=0
+                if (tablero[i][j] == fichaJugador) {
+                    contadorFichasConsecutivas++;
+                } else if (tablero[i][j] != fichaJugador) {
+                    contadorFichasConsecutivas = 0;
+                }
+                if (contadorFichasConsecutivas == 4) {
+                    return true;
+                }
+                i--;    //i=2
+                j++;    //j=1
+            }
+        }
+        return false;
+    }
+
+    public static boolean comprobarDiagonalIzquierdaADerechaParte2(char[][] tablero, int fichaJugador) {
+
+        for (int k = 1; k <= tablero[0].length - 1; k++) {  //k=1 aumentara hasta k=6
+            int contadorFichasConsecutivas = 0;
+            int i = tablero.length - 1; //i=5
+            int j = k;  //j=1
+            while (j <= tablero[0].length - 1) {
+                // 1 <= 6
+                if (tablero[i][j] == fichaJugador) {
+                    contadorFichasConsecutivas++;
+                } else if (tablero[i][j] != fichaJugador) {
+                    contadorFichasConsecutivas = 0;
+                }
+                if (contadorFichasConsecutivas == 4) {
+                    return true;
+                }
+                i--;
+                j++;
+            }
+        }
+        return false;
+    }
+
+
+
+
+
     // comprobar 4 diagonales dentro de la tabla
     //[0][0] [0][1] [0][2] [0][3] [0][4] [0][5] [0][6]
     //[1][0] [1][1] [1][2] [1][3] [1][4] [1][5] [1][6]
