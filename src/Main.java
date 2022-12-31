@@ -1,6 +1,6 @@
 public class Main {
     public static boolean comprobarFichasEnHorizontal(char[][] tablero, char fichaJugador) {
-        for (int i = tablero.length-1; i >=0; i--) {   // filas
+        for (int i = tablero.length - 1; i >= 0; i--) {   // filas
             int contadorFichasSeguidas = 0;
             for (int j = 0; j < tablero[i].length; j++) {
                 if (tablero[i][j] == fichaJugador) {
@@ -56,6 +56,7 @@ public class Main {
 //        tablero[1][3] = 'X';
 //        tablero[1][4] = 'O';
 //        tablero[1][5] = 'O';
+/*
         tablero[3][0] = 'X';
         tablero[2][1] = 'X';
         tablero[1][2] = 'X';
@@ -65,6 +66,7 @@ public class Main {
         } else {
             System.out.println("No ganador");
         }
+*/
         /*
 
         tablero[3][0] = 'X';
@@ -90,5 +92,59 @@ public class Main {
 //        System.out.println("Hello world!");
         //Conecta4.juego();
 
+        tablero[3][0] = 'X';
+        tablero[2][1] = 'X';
+        tablero[1][2] = 'X';
+        tablero[0][3] = 'X';
+        if (Conecta4.iteracionEnDiagonalDerechaAIzquierda(tablero, 0, 3, 3, 0, 'X')) {
+            System.out.println("Ganador encontrado");
+        } else {
+            System.out.println("No ganador");
+        }
+    }
+
+    public static boolean imprimirDiagonalIzquierdaInferiorADerechaParte1(char[][] tablero, int fichaJugador) {
+
+        for (int k = 3; k <= tablero.length - 1; k++) {
+            int contadorFichasConsecutivas = 0;
+            int i = k;
+            int j = 0;
+            while (i >= 0) {
+                if (tablero[i][j] == fichaJugador) {
+                    contadorFichasConsecutivas++;
+                } else if (tablero[i][j] != fichaJugador) {
+                    contadorFichasConsecutivas = 0;
+                }
+                if (contadorFichasConsecutivas == 4) {
+                    return true;
+                }
+                i = i - 1;
+                j = j + 1;
+            }
+        }
+        return false;
+    }
+
+    public static boolean comprobarDiagonalIzquierdaADerechaParte2(char[][] tablero, int fichaJugador) {
+
+        for (int k = 1; k <= tablero[0].length - 1; k++) {
+            int contadorFichasConsecutivas = 0;
+            int i = tablero.length - 1;
+            int j = k;
+            while (j <= tablero[0].length - 1) {
+
+                if (tablero[i][j] == fichaJugador) {
+                    contadorFichasConsecutivas++;
+                } else if (tablero[i][j] != fichaJugador) {
+                    contadorFichasConsecutivas = 0;
+                }
+                if (contadorFichasConsecutivas == 4) {
+                    return true;
+                }
+                i = i - 1;
+                j = j + 1;
+            }
+        }
+        return false;
     }
 }

@@ -176,6 +176,38 @@ public class Conecta4 {
         return false;
     }
 
+    // comprobar 4 diagonales dentro de la tabla
+    //[0][0] [0][1] [0][2] [0][3] [0][4] [0][5] [0][6]
+    //[1][0] [1][1] [1][2] [1][3] [1][4] [1][5] [1][6]
+    //[2][0] [2][1] [2][2] [2][3] [2][4] [2][5] [2][6]
+    //[3][0] [3][1] [3][2] [3][3] [3][4] [3][5] [3][6]
+    //[4][0] [4][1] [4][2] [4][3] [4][4] [4][5] [4][6]
+    //[5][0] [5][1] [5][2] [5][3] [5][4] [5][5] [5][6]
+    //                     [0][3]
+    //              [1][2]
+    //       [2][1]
+    //[3][0]
+
+    public static boolean iteracionEnDiagonalDerechaAIzquierda(char[][] tablero, int inicioI, int finalI, int inicioJ, int finalJ, char fichaJugador) {
+        //                                                                              0           4           3           0
+        int j = inicioJ;
+        int contadorFichasConsecutivas = 0;
+        for (int i = inicioI; i < finalI; i++) {
+//            while (j != finalJ){
+            if (tablero[i][j] == fichaJugador) {
+                contadorFichasConsecutivas++;
+            } else if (tablero[i][j] != fichaJugador) {
+                contadorFichasConsecutivas = 0;
+            }
+            if (contadorFichasConsecutivas == 4) {
+                return true;
+            }
+            j--;
+        }
+//        }
+        return false;
+    }
+
     // comprobar 6 diagonales dentro de la tabla
     //[0][0] [0][1] [0][2] [0][3] [0][4] [0][5] [0][6]
     //[1][0] [1][1] [1][2] [1][3] [1][4] [1][5] [1][6]
@@ -185,19 +217,32 @@ public class Conecta4 {
     //[5][0] [5][1] [5][2] [5][3] [5][4] [5][5] [5][6]
     // diagonal izquierda arriba a derecha abajo
     public static boolean comprobarFichasDeIzquierdaSuperiorADerechaInferior(char[][] tablero, char fichaJugador) {
+        int j = 3;
+        int contadorFichasConsecutivas = 0;
         for (int i = 0; i < 4; i++) {
-            int contadorFichasConsecutivas = 0;
-            for (int j = 0; j < tablero[i].length; j++) {
-                if (tablero[i][j] == fichaJugador) {
-                    contadorFichasConsecutivas++;
-                } else if (tablero[i][j] != fichaJugador) {
-                    contadorFichasConsecutivas = 0;
-                }
-                if (contadorFichasConsecutivas == 4) {
-                    return true;
-                }
+            if (tablero[i][j] == fichaJugador) {
+                contadorFichasConsecutivas++;
+            } else if (tablero[i][j] != fichaJugador) {
+                contadorFichasConsecutivas = 0;
             }
+            if (contadorFichasConsecutivas == 4) {
+                return true;
+            }
+            j--;
         }
+//        for (int i = 0; i < 4; i++) {
+//            int contadorFichasConsecutivas = 0;
+//            for (int j = 0; j < tablero[i].length; j++) {
+//                if (tablero[i][j] == fichaJugador) {
+//                    contadorFichasConsecutivas++;
+//                } else if (tablero[i][j] != fichaJugador) {
+//                    contadorFichasConsecutivas = 0;
+//                }
+//                if (contadorFichasConsecutivas == 4) {
+//                    return true;
+//                }
+//            }
+//        }
         return false;
     }
 
