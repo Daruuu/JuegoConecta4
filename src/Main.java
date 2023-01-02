@@ -169,11 +169,11 @@ public class Main {
 //        tablero[1][0] = 'X';
 
 //        tablero[1][2] = 'X';
-        tablero[5][5] = 'X';
+        /*tablero[5][5] = 'X';
         tablero[4][4] = 'O';
         tablero[3][3] = 'X';
         tablero[2][2] = 'X';
-        tablero[1][1] = 'X';
+        tablero[1][1] = 'X';*/
 //        tablero[0][0] = 'O';
 //        if (Conecta4.diagonalInferiorDerechaASuperiorIzquierdaParte2(tablero, 'X')) {
 //            System.out.println("Ganador encontrado");

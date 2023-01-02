@@ -9,12 +9,14 @@ public class Conecta4 {
         int opcion = opcionesJuego(sc);
         switch (opcion) {
             case 1:
-                crearTablero(tablero);
-                imprimirTablero(tablero);
+                tableroDeJuego(tablero);
                 break;
             case 2:
                 turnosJugadores(tablero, sc);
                 comprobarGanador();
+                break;
+            case 3:
+                introducirFichaJugador(tablero, sc,jugador[0]);
                 break;
             default:
                 break;
@@ -27,19 +29,6 @@ public class Conecta4 {
                 "[2]- Jugar contra robot\n" +
                 "Elige una opcion: ");
         return sc.nextInt();
-    }
-
-
-    public static void crearTablero(char[][] tablero) {
-        for (int i = 0; i < tablero.length; i++) {
-            for (int j = 0; j < tablero[i].length; j++) {
-                if (j % 2 == 0) {
-                    tablero[i][j] = '|';
-                } else {
-                    tablero[i][j] = ' ';
-                }
-            }
-        }
     }
 
     //tablero del juego
@@ -56,17 +45,30 @@ public class Conecta4 {
         imprimirTablero(tablero);
     }
 
+    public static void imprimirTablero(char[][] tablero) {
+        for (char[] f : tablero) {
+            for (char c : f) {
+                System.out.print(c);
+            }
+            System.out.println();
+        }
+        System.out.println("|0|1|2|3|4|5|6|");
+    }
+
     //0-1-2-3-4-5-6 --> columnas a elegir en el juego
     public static void introducirFichaJugador(char[][] tablero, Scanner sc, int indiceJugador) {
 
-        System.out.print("Jugador" + jugador[indiceJugador] +"\nelige una columna del 0 al 6: ");
+        System.out.print("Jugador" + jugador[indiceJugador] + "\nelige una columna del 0 al 6: ");
         int ficha = sc.nextInt();
         //iterar de la fila 6 a la fila 1
-        for (int i = tablero.length - 1; i >= 0; i--) {
-            if (tablero[i][ficha] == ' ') {
-                tablero[i][ficha] = jugador[indiceJugador];
-                break;
+        while (ficha>-1 && ficha<7){
+            for (int i = tablero.length - 1; i >= 0; i--) {
+                if (tablero[i][ficha] == ' ') {
+                    tablero[i][ficha] = jugador[indiceJugador];
+                    break;
+                }
             }
+            ficha = sc.nextInt();
         }
     }
 
@@ -84,16 +86,6 @@ public class Conecta4 {
             imprimirTablero(tablero);
             comprobarGanador();
         }
-    }
-
-    public static void imprimirTablero(char[][] tablero) {
-        for (char[] f : tablero) {
-            for (char c : f) {
-                System.out.print(c);
-            }
-            System.out.println();
-        }
-        System.out.println("|1|2|3|4|5|6|");
     }
 
     //si ejecuto la opcion 1 del menu, el cronometro empieza a ejecutarse.
@@ -249,7 +241,7 @@ public class Conecta4 {
             System.out.println("jugador 2 con ficha O gana");
 
         } else {
-            System.out.println("no hay ganador");
+            System.out.println("empate");
         }
     }
 
