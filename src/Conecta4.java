@@ -9,14 +9,14 @@ public class Conecta4 {
         int opcion = opcionesJuego(sc);
         switch (opcion) {
             case 1:
-                tableroDeJuego(tablero);
+                tableroDeJuego();
+                turnosJugadores(tablero);
                 break;
             case 2:
-                turnosJugadores(tablero, sc);
-                comprobarGanador();
+
                 break;
             case 3:
-                introducirFichaJugador(tablero, sc,jugador[0]);
+
                 break;
             default:
                 break;
@@ -27,28 +27,26 @@ public class Conecta4 {
         System.out.print("Juego Conecta4:\n" +
                 "[1]- Jugar con un amigo\n" +
                 "[2]- Jugar contra robot\n" +
+                "[3]- Mostrar resumen de partida\n" +
                 "Elige una opcion: ");
         return sc.nextInt();
     }
 
-    //tablero del juego
-    public static void tableroDeJuego(char[][] tablero) {
+    public static void tableroDeJuego() {
+        //char[][] tableroModificado = new char[6][7];
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
-                if (j % 2 == 0) {
-                    tablero[i][j] = '|';
-                } else {
-                    tablero[i][j] = ' ';
-                }
+                tablero[i][j] = '-';
             }
         }
         imprimirTablero(tablero);
+//        return tablero;
     }
 
     public static void imprimirTablero(char[][] tablero) {
-        for (char[] f : tablero) {
-            for (char c : f) {
-                System.out.print(c);
+        for (char[] filas : tablero) {
+            for (char columnas : filas) {
+                System.out.print(columnas);
             }
             System.out.println();
         }
@@ -56,31 +54,30 @@ public class Conecta4 {
     }
 
     //0-1-2-3-4-5-6 --> columnas a elegir en el juego
-    public static void introducirFichaJugador(char[][] tablero, Scanner sc, int indiceJugador) {
+    public static void introducirFichaJugador(char[][] tablero, int indiceJugador) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Jugador " + jugador[indiceJugador] + " \nelige una columna del 0 al 6: ");
 
-        System.out.print("Jugador" + jugador[indiceJugador] + "\nelige una columna del 0 al 6: ");
         int ficha = sc.nextInt();
-        //iterar de la fila 6 a la fila 1
-        while (ficha>-1 && ficha<7){
+        while (ficha >= 0 && ficha < 7) {
             for (int i = tablero.length - 1; i >= 0; i--) {
-                if (tablero[i][ficha] == ' ') {
+                if (tablero[i][ficha] == '-') {
                     tablero[i][ficha] = jugador[indiceJugador];
                     break;
                 }
             }
-            ficha = sc.nextInt();
         }
     }
 
-    public static void turnosJugadores(char[][] tablero, Scanner sc) {
+    public static void turnosJugadores(char[][] tablero) {
         boolean turnoJugador = true;
         int contadorTurnos = 0;
         int turnosMaximos = 42;
-        while (turnoJugador && contadorTurnos <= turnosMaximos) {
+        while (turnoJugador && contadorTurnos < turnosMaximos) {
             if (contadorTurnos % 2 == 0) {
-                introducirFichaJugador(tablero, sc, 0);
+                introducirFichaJugador(tablero, 0);
             } else if (contadorTurnos % 2 == 1) {
-                introducirFichaJugador(tablero, sc, 1);
+                introducirFichaJugador(tablero, 1);
             }
             contadorTurnos++;
             imprimirTablero(tablero);
@@ -111,7 +108,8 @@ public class Conecta4 {
     [3][0] [3][1] [3][2] [3][3] [3][4] [3][5] [3][6]
     [4][0] [4][1] [4][2] [4][3] [4][4] [4][5] [4][6]
     [5][0] [5][1] [5][2] [5][3] [5][4] [5][5] [5][6]*/
-    public static boolean comprobarFichasEnHorizontal(char[][] tablero, char fichaJugador) {
+
+    public static boolean fichasEnHorizontal(char[][] tablero, char fichaJugador) {
         for (int i = tablero.length - 1; i >= 0; i--) {   // filas
             int contadorFichasConsecutivas = 0;
             for (int j = 0; j < tablero[i].length; j++) {
@@ -128,7 +126,7 @@ public class Conecta4 {
         return false;
     }
 
-    public static boolean comprobarFichasEnVertical(char[][] tablero, char fichaJugador) {
+    public static boolean fichasEnVertical(char[][] tablero, char fichaJugador) {
         for (int j = 0; j < tablero[0].length; j++) {
             int contadorFichasConsecutivas = 0;
             for (int i = tablero.length - 1; i >= 0; i--) {
@@ -145,7 +143,7 @@ public class Conecta4 {
         return false;
     }
 
-    public static boolean comprobarDiagonalIzquierdaInferiorADerechaSuperior1(char[][] tablero, int fichaJugador) {
+    public static boolean diagonalIzquierdaInferiorADerechaSuperior1(char[][] tablero, int fichaJugador) {
         for (int k = 3; k <= tablero.length - 1; k++) { //k=3
             int contadorFichasConsecutivas = 0;
             int i = k;  //i=3
@@ -168,7 +166,7 @@ public class Conecta4 {
         return false;
     }
 
-    public static boolean comprobarDiagonalIzquierdaInferiorADerechaSuperior2(char[][] tablero, int fichaJugador) {
+    public static boolean diagonalIzquierdaInferiorADerechaSuperior2(char[][] tablero, int fichaJugador) {
         for (int k = 1; k <= tablero[0].length - 1; k++) {  //k=1 aumentara hasta k=6
             int contadorFichasConsecutivas = 0;
             int i = tablero.length - 1; //i=5
@@ -190,7 +188,7 @@ public class Conecta4 {
         return false;
     }
 
-    public static boolean comprobarDiagonalDerechaInferiorAIzquierdaSuperior1(char[][] tablero, int fichaJugador) {
+    public static boolean diagonalDerechaInferiorAIzquierdaSuperior1(char[][] tablero, int fichaJugador) {
         for (int k = 3; k <= tablero.length - 1; k++) {
             int contadorFichasConsecutivas = 0;
             int i = k;
@@ -211,7 +209,7 @@ public class Conecta4 {
         return false;
     }
 
-    public static boolean comprobarDiagonalDerechaInferiorAIzquierdaSuperior2(char[][] tablero, int fichaJugador) {
+    public static boolean diagonalDerechaInferiorAIzquierdaSuperior2(char[][] tablero, int fichaJugador) {
         for (int k = tablero.length - 1; k >= 0; k--) {
             int contadorFichasConsecutivas = 0;
             int i = tablero.length - 1;
@@ -233,15 +231,16 @@ public class Conecta4 {
     }
 
     public static void comprobarGanador() {
-
-        if (comprobarFichasEnHorizontal(tablero, jugador[0]) || comprobarFichasEnVertical(tablero, jugador[0]) || comprobarDiagonalIzquierdaInferiorADerechaSuperior1(tablero, jugador[0]) || comprobarDiagonalIzquierdaInferiorADerechaSuperior2(tablero, jugador[0]) || comprobarDiagonalDerechaInferiorAIzquierdaSuperior1(tablero, jugador[0]) || comprobarDiagonalDerechaInferiorAIzquierdaSuperior2(tablero, jugador[0])) {
+        Scanner sc = new Scanner(System.in);
+        if (fichasEnHorizontal(tablero, jugador[0]) || fichasEnVertical(tablero, jugador[0]) || diagonalIzquierdaInferiorADerechaSuperior1(tablero, jugador[0]) || diagonalIzquierdaInferiorADerechaSuperior2(tablero, jugador[0]) || diagonalDerechaInferiorAIzquierdaSuperior1(tablero, jugador[0]) || diagonalDerechaInferiorAIzquierdaSuperior2(tablero, jugador[0])) {
             System.out.println("jugador 1 con ficha X gana");
 
-        } else if (comprobarFichasEnHorizontal(tablero, jugador[1]) || comprobarFichasEnVertical(tablero, jugador[1]) || comprobarDiagonalIzquierdaInferiorADerechaSuperior1(tablero, jugador[1]) || comprobarDiagonalIzquierdaInferiorADerechaSuperior2(tablero, jugador[1]) || comprobarDiagonalDerechaInferiorAIzquierdaSuperior1(tablero, jugador[1]) || comprobarDiagonalDerechaInferiorAIzquierdaSuperior2(tablero, jugador[1])) {
+        } else if (fichasEnHorizontal(tablero, jugador[1]) || fichasEnVertical(tablero, jugador[1]) || diagonalIzquierdaInferiorADerechaSuperior1(tablero, jugador[1]) || diagonalIzquierdaInferiorADerechaSuperior2(tablero, jugador[1]) || diagonalDerechaInferiorAIzquierdaSuperior1(tablero, jugador[1]) || diagonalDerechaInferiorAIzquierdaSuperior2(tablero, jugador[1])) {
             System.out.println("jugador 2 con ficha O gana");
 
         } else {
             System.out.println("empate");
+            opcionesJuego(sc);
         }
     }
 
