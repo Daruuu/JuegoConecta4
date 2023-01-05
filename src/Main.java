@@ -3,10 +3,9 @@ public class Main {
     public static void main(String[] args) {
         char[][] tablero = new char[6][7];
         char[] jugador = {'X', 'O'}; // X= jugador 1  O= jugador 2
-//        Conecta4.juego();
-        Conecta4.tableroDeJuego();
-
-
+//        Conecta4.tableroDeJuego();
+//        Conecta4.imprimirTablero();
+        Conecta4.juego();
         /*
         tablero[1][1] = 'X';
         tablero[1][2] = 'X';
