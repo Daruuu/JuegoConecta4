@@ -1,49 +1,46 @@
-# Game Connect 4
+# Juego Conecta 4
 
-## Description
-This game is an abstract game made up of two players, and it is about introducing **tiles** on a board with six rows and seven columns.
+## Descripción
 
-The objective is to align 4 consecutive tiles of the same color(red - yellow) horizontally, vertically or diagonally.
+Conecta 4 es un juego abstracto formado por dos jugadores, y se trata de introducir **fichas** en un tablero de **seis** filas por **siete** columnas.
 
+El objetivo es alinear **4** fichas consecutivas del mismo color (rojo - amarillo) en horizontal, vertical o diagonal para poder ganar el juego.
 
-## Getting Started
+## Guía Rapida
 
-### Dependencies
+### Dependencias:
 
-* Have an IDE installed __Intellij IDEA__ or __Eclipse__
-* Use terminal in any distro linux or Windows.
+* Tener un IDE instalado como __Intellij IDEA__ o __Eclipse__
+* Tener conocimientos de utilizar la `terminal` en Linux o Windows.
 
-### Deploy in IDE:
-- Clone the repo: `git clone https://github.com/Daruuu/JuegoConecta4.git`
-- opened in`IDE`.
-- Go to directory `JuegoConecta4/src`.
-- Execute the class `Main.java`
+### Desplegar en IDE:
+- Clonar el repositorio: `git clone https://github.com/Daruuu/JuegoConecta4.git`
+- Abrir el proyecto en un `IDE`.
+- Ir al directorio `JuegoConecta4/src`.
+- Ejecutar la clase `Main.java`
 
-### Run in Terminal
+### Ejecutar en Terminal:
 
-Clone the project
+Clonar el repositorio:
 ```bash
   git clone https://github.com/Daruuu/JuegoConecta4.git
 ```
-Go to the project directory
+Ir al directorio principal del proyecto:
 ```bash
   cd JuegoConecta4/src
 ```
-Execute the game
+Ejecutar el archivo Main.java
 ```bash
   java Main.java
 ```
 
 ## Help
-
-Any advise for common problems or issues.
+Any advice for common problems or issues.
 ```
 command to run if program contains helper info
 ```
 
-## Authors
-
-Contributors names and contact info
+## Autores
 
 [@Daruuu](https://github.com/Daruuu)
 
@@ -56,21 +53,17 @@ Contributors names and contact info
     * Initial Release
 
 ## Screenshots
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+Menu del juego:
+
+![menu juego](Enunciado/Screenshots/menuJuego.png)
+
+Tablero de juego:
+
+![tablero de juego antes de jugar](Enunciado/Screenshots/tableroJuego.png)
+
 
 ## Acknowledgments
 
 Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
-
-
-
-
-
-
-
-
+* []()

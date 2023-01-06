@@ -3,12 +3,14 @@ import java.util.Scanner;
 public class Conecta4 {
     private static final int filas = 6;
     private static final int columnas = 7;
-    private static int numTurnos = 42;
+    private static long inicioPartida;
+    private static long finPartida;
+    private static final int turnosJuego = 42;
     private static int contadorTurnos;
-    private static char[][] tablero = new char[6][7];    //filas-columnas
-    private static final char[] jugador = {'X', 'O'}; // X= jugador 1  O= jugador 2
+    private static char[][] tablero = new char[6][7];
+    private static final char[] jugador = {'X', 'O'};
 
-    public static void juego() {
+    public static void conectaCuatro() {
         Scanner sc = new Scanner(System.in);
         int opcion = opcionesJuego(sc);
         switch (opcion) {
@@ -20,10 +22,8 @@ public class Conecta4 {
             case 2:
 
                 break;
-            case 3:
-
-                break;
             default:
+                System.out.println("elige una opcion correcta");
                 break;
         }
     }
@@ -46,13 +46,18 @@ public class Conecta4 {
     }
 
     public static void imprimirTablero() {
-        for (char[] filas : tablero) {
-            for (char columnas : filas) {
-                System.out.print(columnas);
+
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                if (j == 0) {
+                    System.out.print("  " + tablero[i][j]);
+                } else {
+                    System.out.print("   " + tablero[i][j]);
+                }
             }
             System.out.println();
         }
-        System.out.println("|0|1|2|3|4|5|6|");
+        System.out.println("| 0 | 1 | 2 | 3 | 4 | 5 | 6 |");
     }
 
     public static boolean comprobarFicha(int fichaEnColumna) {
@@ -64,9 +69,8 @@ public class Conecta4 {
         }
     }
 
-    //0-1-2-3-4-5-6 --> columnas a elegir en el juego
     public static boolean agregarFichaTablero(int indiceJugador) {
-        System.out.print("Jugador " + jugador[indiceJugador] + " \nelige una columna del 0 al 6: ");
+        System.out.print("JUGADOR " + jugador[indiceJugador] + " \nelige una columna del 0 al 6: ");
         Scanner sc = new Scanner(System.in);
         int ficha = sc.nextInt();
 
@@ -82,14 +86,15 @@ public class Conecta4 {
     }
 
     public static void turnosJugadores() {
+        inicioPartida = inicioCronometro();
         contadorTurnos = 0;
         boolean esFichaCorrecta = false;
         boolean ganadorEncontrado = false;
-        while (contadorTurnos < numTurnos && !ganadorEncontrado) {
-
+        while (contadorTurnos < turnosJuego && !ganadorEncontrado) {
             if (contadorTurnos % 2 == 0) {
                 esFichaCorrecta = agregarFichaTablero(0);
-            } else if (contadorTurnos % 2 != 0) {
+
+            } else if (contadorTurnos % 2 == 1) {
                 esFichaCorrecta = agregarFichaTablero(1);
             }
             if (esFichaCorrecta) {
@@ -98,6 +103,7 @@ public class Conecta4 {
             }
             imprimirTablero();
         }
+        finPartida = finCronometro();
     }
 
     public static long inicioCronometro() {
@@ -108,8 +114,9 @@ public class Conecta4 {
         return System.currentTimeMillis();
     }
 
-    public static long tiempoPartida() {
-        return (finCronometro() - inicioCronometro()) / 1000;
+    public static void tiempoPartida() {
+        System.out.println(((finPartida - inicioPartida) / 1000) / 60 + " minutos");
+        System.out.println(((finPartida - inicioPartida) / 1000) % 60 + " segundos");
     }
 
     /*[0][0] [0][1] [0][2] [0][3] [0][4] [0][5] [0][6]
@@ -120,7 +127,8 @@ public class Conecta4 {
     [5][0] [5][1] [5][2] [5][3] [5][4] [5][5] [5][6]*/
 
     public static boolean fichasEnHorizontal(char fichaJugador) {
-        for (int i = tablero.length - 1; i >= 0; i--) {   // filas
+
+        for (int i = tablero.length - 1; i >= 0; i--) {
             int contadorFichasConsecutivas = 0;
             for (int j = 0; j < tablero[i].length; j++) {
                 if (tablero[i][j] == fichaJugador) {
@@ -137,6 +145,7 @@ public class Conecta4 {
     }
 
     public static boolean fichasEnVertical(char fichaJugador) {
+
         for (int j = 0; j < tablero[0].length; j++) {
             int contadorFichasConsecutivas = 0;
             for (int i = tablero.length - 1; i >= 0; i--) {
@@ -153,14 +162,13 @@ public class Conecta4 {
         return false;
     }
 
-    public static boolean diagonalIzquierdaInferiorADerechaSuperior1(int fichaJugador) {
-        for (int k = 3; k <= tablero.length - 1; k++) { //k=3
+    public static boolean diagonalIzquierdaInferiorADerechaSuperior1(char fichaJugador) {
+
+        for (int k = 3; k <= tablero.length - 1; k++) {
             int contadorFichasConsecutivas = 0;
-            int i = k;  //i=3
-            int j = 0;  //j=0
-            //j aumenta hasta tablero[0].length
+            int i = k;
+            int j = 0;
             while (i >= 0 && j <= tablero[0].length - 1) {
-                //i=3       j=0
                 if (tablero[i][j] == fichaJugador) {
                     contadorFichasConsecutivas++;
                 } else if (tablero[i][j] != fichaJugador) {
@@ -169,20 +177,20 @@ public class Conecta4 {
                 if (contadorFichasConsecutivas == 4) {
                     return true;
                 }
-                i--;    //i=2
-                j++;    //j=1
+                i--;
+                j++;
             }
         }
         return false;
     }
 
-    public static boolean diagonalIzquierdaInferiorADerechaSuperior2(int fichaJugador) {
-        for (int k = 1; k <= tablero[0].length - 1; k++) {  //k=1 aumentara hasta k=6
+    public static boolean diagonalIzquierdaInferiorADerechaSuperior2(char fichaJugador) {
+
+        for (int k = 1; k <= tablero[0].length - 1; k++) {
             int contadorFichasConsecutivas = 0;
-            int i = tablero.length - 1; //i=5
-            int j = k;  //j=1
+            int i = tablero.length - 1;
+            int j = k;
             while (j <= tablero[0].length - 1) {
-                // 1 <= 6
                 if (tablero[i][j] == fichaJugador) {
                     contadorFichasConsecutivas++;
                 } else if (tablero[i][j] != fichaJugador) {
@@ -199,11 +207,12 @@ public class Conecta4 {
     }
 
     public static boolean diagonalDerechaInferiorAIzquierdaSuperior1(int fichaJugador) {
+
         for (int k = 3; k <= tablero.length - 1; k++) {
             int contadorFichasConsecutivas = 0;
             int i = k;
-            int j = tablero[0].length - 1;  //6 -> 5 -> 4 -> 3 -> 2 -> 1
-            while (i >= 0) { //i=3 -> i=2 -> i=1 -> i= ultima iteracion = 0
+            int j = tablero[0].length - 1;
+            while (i >= 0) {
                 if (tablero[i][j] == fichaJugador) {
                     contadorFichasConsecutivas++;
                 } else if (tablero[i][j] != fichaJugador) {
@@ -220,6 +229,7 @@ public class Conecta4 {
     }
 
     public static boolean diagonalDerechaInferiorAIzquierdaSuperior2(int fichaJugador) {
+
         for (int k = tablero.length - 1; k >= 0; k--) {
             int contadorFichasConsecutivas = 0;
             int i = tablero.length - 1;
@@ -242,16 +252,20 @@ public class Conecta4 {
 
     public static boolean comprobarGanador() {
         Scanner sc = new Scanner(System.in);
+
         if (fichasEnHorizontal(jugador[0]) || fichasEnVertical(jugador[0]) || diagonalIzquierdaInferiorADerechaSuperior1(jugador[0]) || diagonalIzquierdaInferiorADerechaSuperior2(jugador[0]) || diagonalDerechaInferiorAIzquierdaSuperior1(jugador[0]) || diagonalDerechaInferiorAIzquierdaSuperior2(jugador[0])) {
-            System.out.println("JUGADOR 1 CON FICHA X GANA");
+            System.out.println("<<<<<<<<<< JUGADOR 1 'X' GANADOR >>>>>>>>>>");
+            resumenPartida();
             return true;
 
         } else if (fichasEnHorizontal(jugador[1]) || fichasEnVertical(jugador[1]) || diagonalIzquierdaInferiorADerechaSuperior1(jugador[1]) || diagonalIzquierdaInferiorADerechaSuperior2(jugador[1]) || diagonalDerechaInferiorAIzquierdaSuperior1(jugador[1]) || diagonalDerechaInferiorAIzquierdaSuperior2(jugador[1])) {
-            System.out.println("JUGADOR 2 CON FICHA O GANA");
+            System.out.println("<<<<<<<<<< JUGADOR 2 'O' GANADOR >>>>>>>>>>");
+            resumenPartida();
             return true;
 
-        } else if (contadorTurnos == numTurnos - 1) {
+        } else if (contadorTurnos == turnosJuego - 1) {
             System.out.println("EMPATE");
+            resumenPartida();
             opcionesJuego(sc);
             return true;
         }
@@ -259,6 +273,7 @@ public class Conecta4 {
     }
 
     public static void resumenPartida() {
+        System.out.println("resumen partida");
         tiempoPartida();
     }
 }
