@@ -70,10 +70,11 @@ public class Conecta4 {
         }
     }
 
-    public static boolean comprobarColumnaLlena(int columna){
+    public static boolean comprobarColumnaLlena(int columna) {
 //        char celdaVacia = '-';
         return tablero[0][columna] != '-';
     }
+
     public static boolean agregarFichaTablero(int indiceJugador) {
 //        inicioPartida = inicioCronometro();
         System.out.print("JUGADOR " + jugador[indiceJugador] + " \nelige una columna del 0 al 6: ");
@@ -81,10 +82,10 @@ public class Conecta4 {
         int ficha = sc.nextInt();
 
         if (comprobarRangoDeFicha(ficha)) {
-            if (comprobarColumnaLlena(ficha)){
+            if (comprobarColumnaLlena(ficha)) {
                 System.out.print("COLUMNA LLENA");
                 return false;
-            }else {
+            } else {
                 for (int i = tablero.length - 1; i >= 0; i--) {
                     if (tablero[i][ficha] == '-') {
                         tablero[i][ficha] = jugador[indiceJugador];
@@ -117,6 +118,7 @@ public class Conecta4 {
         }
         finPartida = finCronometro();
     }
+
     public static long inicioCronometro() {
         return System.currentTimeMillis();
     }
@@ -130,12 +132,16 @@ public class Conecta4 {
         System.out.println(((finPartida - inicioPartida) / 1000) / 60 + " minutos");
     }
 
-    /*[0][0] [0][1] [0][2] [0][3] [0][4] [0][5] [0][6]
+    /*
+
+    [0][0] [0][1] [0][2] [0][3] [0][4] [0][5] [0][6]
     [1][0] [1][1] [1][2] [1][3] [1][4] [1][5] [1][6]
     [2][0] [2][1] [2][2] [2][3] [2][4] [2][5] [2][6]
     [3][0] [3][1] [3][2] [3][3] [3][4] [3][5] [3][6]
     [4][0] [4][1] [4][2] [4][3] [4][4] [4][5] [4][6]
-    [5][0] [5][1] [5][2] [5][3] [5][4] [5][5] [5][6]*/
+    [5][0] [5][1] [5][2] [5][3] [5][4] [5][5] [5][6]
+
+    */
 
     public static boolean fichasEnHorizontal(char fichaJugador) {
 
@@ -217,7 +223,7 @@ public class Conecta4 {
         return false;
     }
 
-    public static boolean diagonalDerechaInferiorAIzquierdaSuperior1(int fichaJugador) {
+    public static boolean diagonalDerechaInferiorAIzquierdaSuperior1(char fichaJugador) {
 
         for (int k = 3; k <= tablero.length - 1; k++) {
             int contadorFichasConsecutivas = 0;
@@ -239,7 +245,7 @@ public class Conecta4 {
         return false;
     }
 
-    public static boolean diagonalDerechaInferiorAIzquierdaSuperior2(int fichaJugador) {
+    public static boolean diagonalDerechaInferiorAIzquierdaSuperior2(char fichaJugador) {
 
         for (int k = tablero.length - 1; k >= 0; k--) {
             int contadorFichasConsecutivas = 0;

@@ -62,7 +62,8 @@ Tablero de juego:
 
 ![tablero de juego antes de jugar](Enunciado/Screenshots/tableroJuego.png)
 
-
+Representacion grafica de la matriz que he utilizado para el juego:
+![matriz de caracteres](Enunciado/Screenshots/matriz-chars-juego.png)
 ## Acknowledgments
 
 Inspiration, code snippets, etc.
