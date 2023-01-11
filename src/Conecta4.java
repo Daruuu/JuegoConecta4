@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Conecta4 {
@@ -18,10 +21,14 @@ public class Conecta4 {
             case 1:
                 tableroDeJuego();
                 imprimirTablero();
+                Date tiempoInicio = new Date();
+                inicioPartida = tiempoInicio.getTime();
                 turnosJugadores();
+                Date tiempoFin = new Date();
+                finPartida = tiempoFin.getTime();
                 break;
             case 2:
-
+                System.out.println("no disponible aun");
                 break;
             default:
                 System.out.println("elige una opcion correcta");
@@ -39,51 +46,66 @@ public class Conecta4 {
     }
 
     public static void tableroDeJuego() {
+        for (char[] chars : tablero) {
+            Arrays.fill(chars, '-');
+        }
+        /*
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
                 tablero[i][j] = '-';
             }
         }
+         */
     }
 
-    public static void imprimirTablero() {
 
+    public static void imprimirTablero() {
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
                 if (j == 0) {
-                    System.out.print("  " + tablero[i][j]);
+                    if (tablero[i][j] == 'X') {
+                        System.out.print("  " + "\033[31m" + tablero[i][j] + "\033[0m"); // color rojo
+                    } else if (tablero[i][j] == 'O') {
+                        System.out.print("  " + "\033[33m" + tablero[i][j] + "\033[0m");   //color amarillo en secuencia ANSI
+                    } else {
+                        System.out.print("  " + "\033[34m" + tablero[i][j] + "\033[0m");
+                    }
                 } else {
-                    System.out.print("   " + tablero[i][j]);
+                    // System.out.print("   " + tablero[i][j]);
+                    if (tablero[i][j] == 'X') {
+                        System.out.print("   " + "\033[31m" + tablero[i][j] + "\033[0m"); // color rojo
+                    } else if (tablero[i][j] == 'O') {
+                        System.out.print("   " + "\033[33m" + tablero[i][j] + "\033[0m");   //color amarillo en secuencia ANSI
+                    } else {
+                        System.out.print("   " + "\033[34m" + tablero[i][j] + "\033[0m");
+                    }
                 }
             }
             System.out.println();
         }
-        System.out.println("| 0 | 1 | 2 | 3 | 4 | 5 | 6 |");
+        System.out.println("\033[34m" + "| 0 | 1 | 2 | 3 | 4 | 5 | 6 |" + "\033[0m");
     }
 
     public static boolean comprobarRangoDeFicha(int fichaEnColumna) {
         if (fichaEnColumna >= 0 && fichaEnColumna < columnas) {
             return true;
         } else {
-            System.err.println("COLUMNA DE FICHA INEXISTENTE");
+            System.out.println("\033[31m" + "COLUMNA DE FICHA INEXISTENTE!" + "\033[0m"); // color rojo
             return false;
         }
     }
 
     public static boolean comprobarColumnaLlena(int columna) {
-//        char celdaVacia = '-';
         return tablero[0][columna] != '-';
     }
 
     public static boolean agregarFichaTablero(int indiceJugador) {
-//        inicioPartida = inicioCronometro();
-        System.out.print("JUGADOR " + jugador[indiceJugador] + " \nelige una columna del 0 al 6: ");
         Scanner sc = new Scanner(System.in);
+        System.out.print("JUGADOR " + jugador[indiceJugador] + "\033[34m\nelige una columna del 0 al 6: \033[0m");
         int ficha = sc.nextInt();
-
         if (comprobarRangoDeFicha(ficha)) {
             if (comprobarColumnaLlena(ficha)) {
-                System.out.print("COLUMNA LLENA");
+                System.out.println("\033[31m" + "COLUMNA LLENA!" + "\033[0m"); // color rojo
                 return false;
             } else {
                 for (int i = tablero.length - 1; i >= 0; i--) {
@@ -98,7 +120,6 @@ public class Conecta4 {
     }
 
     public static void turnosJugadores() {
-        inicioPartida = inicioCronometro();
         contadorTurnos = 0;
         boolean esFichaCorrecta = false;
         boolean ganadorEncontrado = false;
@@ -116,20 +137,12 @@ public class Conecta4 {
             }
             imprimirTablero();
         }
-        finPartida = finCronometro();
-    }
-
-    public static long inicioCronometro() {
-        return System.currentTimeMillis();
-    }
-
-    public static long finCronometro() {
-        return System.currentTimeMillis();
     }
 
     public static void tiempoPartida() {
-        System.out.println(((finPartida - inicioPartida) / 1000) + " segundos");
-        System.out.println(((finPartida - inicioPartida) / 1000) / 60 + " minutos");
+        SimpleDateFormat formatoHora = new SimpleDateFormat("mm:ss");
+        tiempoTranscurrido = finPartida - inicioPartida;
+        System.out.println("\nTiempo transcurrido: " + formatoHora.format(tiempoTranscurrido) + "s");
     }
 
     /*
@@ -271,12 +284,12 @@ public class Conecta4 {
         Scanner sc = new Scanner(System.in);
 
         if (fichasEnHorizontal(jugador[0]) || fichasEnVertical(jugador[0]) || diagonalIzquierdaInferiorADerechaSuperior1(jugador[0]) || diagonalIzquierdaInferiorADerechaSuperior2(jugador[0]) || diagonalDerechaInferiorAIzquierdaSuperior1(jugador[0]) || diagonalDerechaInferiorAIzquierdaSuperior2(jugador[0])) {
-            System.out.println("<<<<<<<<<< JUGADOR 1 'X' GANA >>>>>>>>>>");
+            System.out.print("  \033[31m\"<<<<<<<<<< JUGADOR 1 'X' GANA >>>>>>>>>>\033[0m"); // color rojo
             resumenPartida();
             return true;
 
         } else if (fichasEnHorizontal(jugador[1]) || fichasEnVertical(jugador[1]) || diagonalIzquierdaInferiorADerechaSuperior1(jugador[1]) || diagonalIzquierdaInferiorADerechaSuperior2(jugador[1]) || diagonalDerechaInferiorAIzquierdaSuperior1(jugador[1]) || diagonalDerechaInferiorAIzquierdaSuperior2(jugador[1])) {
-            System.out.println("<<<<<<<<<< JUGADOR 2 'O' GANA >>>>>>>>>>");
+            System.out.println("  \033[33m\"<<<<<<<<<< JUGADOR 2 'O' GANA >>>>>>>>>>\033[0m");  //amarillo
             resumenPartida();
             return true;
 
@@ -290,7 +303,6 @@ public class Conecta4 {
     }
 
     public static void resumenPartida() {
-        System.out.println("resumen partida");
         tiempoPartida();
     }
 }
