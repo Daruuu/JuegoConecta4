@@ -119,3 +119,8 @@ Representacion grafica de la matriz que he utilizado para el juego:
 
 * ccomprobarGanador()
   - Hace una comparacion de sí UNA de las funciones de comprobación retorna `true`, y muestra el jugador ganador.
+
+## Webgrafia
+
+* secuencias de escape [ANSI](http://es.tldp.org/COMO-INSFLUG/COMOs/Bash-Prompt-Como/Bash-Prompt-Como-5.html)
+* Java [API](https://docs.oracle.com/en/java/javase/11/docs/api/)
