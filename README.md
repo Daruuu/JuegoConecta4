@@ -34,12 +34,6 @@ Ejecutar el archivo Main.java
   java Main.java
 ```
 
-## Help
-Any advice for common problems or issues.
-```
-command to run if program contains helper info
-```
-
 ## Autores
 
 [@Daruuu](https://github.com/Daruuu)
@@ -64,7 +58,63 @@ Tablero de juego:
 
 Representacion grafica de la matriz que he utilizado para el juego:
 ![matriz de caracteres](Enunciado/Screenshots/matriz-chars-juego.png)
-## Acknowledgments
 
-Inspiration, code snippets, etc.
-* []()
+
+## Funcionalidades
+
+* conectaCuatro()
+  - Se ejecuta el juego.
+
+
+* opcionesJuego()
+  - Regresa un numero entero que és la opcion que elegimos.
+
+
+* imprimirTablero()
+  - Imprime el tablero vacio.
+ 
+
+* comprobarRangoDeFicha()
+  - Comprueba que la entrada sea menor a la variable `columnas`.
+
+
+* agregarFichaTablero()
+  - Se actualiza el tablero con cada jugada
+  
+
+
+* turnosJugadores()
+  - Dado una condicion se itera por cada jugador
+
+
+* tiempoPartida()
+  - Formateo la hora en minutos-segundos
+
+
+* fichasEnHorizontal()
+  - compruebo si hay un ganador de forma horizontal 
+
+
+* fichasEnVertical()
+  - compruebo si hay un ganador de forma vertical
+
+
+* diagonalIzquierdaInferiorADerechaSuperior1(), 
+  - itero para comprobar desde los extremos `[3][0] [0][3]` hasta `[5][0] [0][5]`
+
+* diagonalIzquierdaInferiorADerechaSuperior2()
+  - itero para comprobar desde los extremos `[5][2] [0][6]` hasta `[5][3] [2][6]`
+
+
+* diagonalDerechaInferiorAIzquierdaSuperior1()
+  - itero para comprobar desde los extremos `[3][6] [0][3]` hasta `[5][6] [0][1]`
+* diagonalDerechaInferiorAIzquierdaSuperior2()
+  - itero para comprobar desde los extremos `[5][5] [0][0]` hasta `[5][3] [2][0]`
+
+
+* resumenPartida()
+  - muestra el tiempo total de la partida jugada
+
+
+* ccomprobarGanador()
+  - Hace una comparacion de sí UNA de las funciones de comprobación retorna `true`, y muestra el jugador ganador.

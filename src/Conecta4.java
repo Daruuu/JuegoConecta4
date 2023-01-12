@@ -11,7 +11,7 @@ public class Conecta4 {
     private static long tiempoTranscurrido;
     private static final int turnosJuego = 42;
     private static int contadorTurnos;
-    private static char[][] tablero = new char[6][7];
+    private static final char[][] tablero = new char[6][7];
     private static final char[] jugador = {'X', 'O'};
 
     public static void conectaCuatro() {
@@ -49,33 +49,25 @@ public class Conecta4 {
         for (char[] chars : tablero) {
             Arrays.fill(chars, '-');
         }
-        /*
-        for (int i = 0; i < tablero.length; i++) {
-            for (int j = 0; j < tablero[i].length; j++) {
-                tablero[i][j] = '-';
-            }
-        }
-         */
     }
-
 
     public static void imprimirTablero() {
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
                 if (j == 0) {
                     if (tablero[i][j] == 'X') {
-                        System.out.print("  " + "\033[31m" + tablero[i][j] + "\033[0m"); // color rojo
+                        System.out.print("  " + "\033[31m" + tablero[i][j] + "\033[0m");    // color rojo en secuencia ANSI
                     } else if (tablero[i][j] == 'O') {
-                        System.out.print("  " + "\033[33m" + tablero[i][j] + "\033[0m");   //color amarillo en secuencia ANSI
+                        System.out.print("  " + "\033[33m" + tablero[i][j] + "\033[0m");    //color amarillo en secuencia ANSI
                     } else {
                         System.out.print("  " + "\033[34m" + tablero[i][j] + "\033[0m");
                     }
                 } else {
                     // System.out.print("   " + tablero[i][j]);
                     if (tablero[i][j] == 'X') {
-                        System.out.print("   " + "\033[31m" + tablero[i][j] + "\033[0m"); // color rojo
+                        System.out.print("   " + "\033[31m" + tablero[i][j] + "\033[0m");
                     } else if (tablero[i][j] == 'O') {
-                        System.out.print("   " + "\033[33m" + tablero[i][j] + "\033[0m");   //color amarillo en secuencia ANSI
+                        System.out.print("   " + "\033[33m" + tablero[i][j] + "\033[0m");
                     } else {
                         System.out.print("   " + "\033[34m" + tablero[i][j] + "\033[0m");
                     }
@@ -90,7 +82,7 @@ public class Conecta4 {
         if (fichaEnColumna >= 0 && fichaEnColumna < columnas) {
             return true;
         } else {
-            System.out.println("\033[31m" + "COLUMNA DE FICHA INEXISTENTE!" + "\033[0m"); // color rojo
+            System.out.println("\033[31m" + "COLUMNA DE FICHA ERRONEA!" + "\033[0m");
             return false;
         }
     }
@@ -102,7 +94,9 @@ public class Conecta4 {
     public static boolean agregarFichaTablero(int indiceJugador) {
         Scanner sc = new Scanner(System.in);
         System.out.print("JUGADOR " + jugador[indiceJugador] + "\033[34m\nelige una columna del 0 al 6: \033[0m");
-        int ficha = sc.nextInt();
+        char fichaChar = sc.next().charAt(0);
+        // 'a' - '0' = 97 - 48 =
+        int ficha = fichaChar - '0';
         if (comprobarRangoDeFicha(ficha)) {
             if (comprobarColumnaLlena(ficha)) {
                 System.out.println("\033[31m" + "COLUMNA LLENA!" + "\033[0m"); // color rojo
@@ -146,14 +140,12 @@ public class Conecta4 {
     }
 
     /*
-
     [0][0] [0][1] [0][2] [0][3] [0][4] [0][5] [0][6]
     [1][0] [1][1] [1][2] [1][3] [1][4] [1][5] [1][6]
     [2][0] [2][1] [2][2] [2][3] [2][4] [2][5] [2][6]
     [3][0] [3][1] [3][2] [3][3] [3][4] [3][5] [3][6]
     [4][0] [4][1] [4][2] [4][3] [4][4] [4][5] [4][6]
     [5][0] [5][1] [5][2] [5][3] [5][4] [5][5] [5][6]
-
     */
 
     public static boolean fichasEnHorizontal(char fichaJugador) {
@@ -280,6 +272,10 @@ public class Conecta4 {
         return false;
     }
 
+    public static void resumenPartida() {
+        tiempoPartida();
+    }
+
     public static boolean comprobarGanador() {
         Scanner sc = new Scanner(System.in);
 
@@ -300,9 +296,5 @@ public class Conecta4 {
             return true;
         }
         return false;
-    }
-
-    public static void resumenPartida() {
-        tiempoPartida();
     }
 }
