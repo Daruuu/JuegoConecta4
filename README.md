@@ -40,10 +40,10 @@ Ejecutar el archivo Main.java
 
 ## Version History
 
-* 0.2
+* Version inicial
     * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-    * Estas son la funciones de comprobacion antes de mejorar la estructura [funciones antes](https://github.com/Daruuu/JuegoConecta4/commit/15aaa783ab71092966e09885170116fec3f6da00#diff-566c5a584ffb3e8a9155d1dce1d9386330e97e027e407b81cb6865844e2fd4adL76)
+    * Funcion de comprobacion antes de mejorar la estructura de la matriz [funciones antes](https://github.com/Daruuu/JuegoConecta4/commit/d038b5b0eceaa51689cc1222add5fca593666323#diff-566c5a584ffb3e8a9155d1dce1d9386330e97e027e407b81cb6865844e2fd4adR197)
+    * Misma función pero mejor estructura [funcion actual](https://github.com/Daruuu/JuegoConecta4/commit/d940818494b5224c339112e460714d5dbee8c37c#diff-566c5a584ffb3e8a9155d1dce1d9386330e97e027e407b81cb6865844e2fd4adR201)
 
 ## Screenshots
 
