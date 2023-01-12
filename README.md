@@ -43,8 +43,7 @@ Ejecutar el archivo Main.java
 * 0.2
     * Various bug fixes and optimizations
     * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
+    * Estas son la funciones de comprobacion antes de mejorar la estructura [funciones antes](https://github.com/Daruuu/JuegoConecta4/commit/15aaa783ab71092966e09885170116fec3f6da00#diff-566c5a584ffb3e8a9155d1dce1d9386330e97e027e407b81cb6865844e2fd4adL76)
 
 ## Screenshots
 
@@ -59,7 +58,9 @@ Tablero de juego:
 Representacion grafica de la matriz que he utilizado para el juego:
 ![matriz de caracteres](Enunciado/Screenshots/matriz-chars-juego.png)
 
+## Estructura UML de proyecto
 
+![imagen](Enunciado/Conecta4UML.png)
 ## Funcionalidades
 
 * conectaCuatro()
