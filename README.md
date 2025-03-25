@@ -49,18 +49,18 @@ Ejecutar el archivo Main.java
 
 Menu del juego:
 
-![menu juego](enunciado/screenshots/menuJuego.png)
+![menu juego](docs/screenshots/menuJuego.png)
 
 Tablero de juego:
 
-![tablero de juego antes de jugar](enunciado/screenshots/tableroJuego.png)
+![tablero de juego antes de jugar](docs/screenshots/tableroJuego.png)
 
 Representacion grafica de la matriz que he utilizado para el juego:
-![matriz de caracteres](enunciado/screenshots/matriz-chars-juego.png)
+![matriz de caracteres](docs/screenshots/matriz-chars-juego.png)
 
 ## Estructura UML de proyecto
 
-![imagen](enunciado/Conecta4UML.png)
+![imagen](docs/Conecta4UML.png)
 ## Funcionalidades
 
 * conectaCuatro()
